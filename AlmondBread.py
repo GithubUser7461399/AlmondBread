@@ -3,8 +3,9 @@ Xres = 256
 Yres = 256
 Xmin = -2.0
 Xmax = 0.47
-Ymin = -1.12
-Ymax = 1.12
+#I think i got variables Ymin and Ymax flipped around, but can not be asked to go back and swap every instance. Live.
+Ymin = 1.12
+Ymax = -1.12
 colours = 72
 renders = 1
 frames = 60
@@ -46,7 +47,7 @@ def renderImage():
                 file.writelines(metaInfo)
             break
 #def rgb2hsv(r,g,b): will be made later
-#main loop
+#main loop. Prompt the user without causing horrific error exceptions I suppose.
 while True:
     userInput = input("Welcome to Python Mandlebrot Explorer CLI. (Z) to render image, (X) to set X bounds, (Y) to set Y bounds, (M) to magnify image, (R) to set resolution, (C) to set number of colours. Anything else to exit.")
     userInput = userInput.casefold()
@@ -98,6 +99,7 @@ while True:
             except ValueError:
                 print("Invalid input!")
             else:
+                #No idea if this magnification code is correct, very geometric series type thing, might be a better way.
                 Xmin = Xmin+((Xmax-Xmin)/2)*(1-0.5**(zoom-1))
                 Xmax = Xmax-((Xmax-Xmin)/2)*(1-0.5**(zoom-1))
                 Ymin = Ymin+((Ymax-Ymin)/2)*(1-0.5**(zoom-1))
