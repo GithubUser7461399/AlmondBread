@@ -77,7 +77,7 @@ while True:
         except ValueError:
             print("NaN")
         else:
-            Ymax = valueInput
+            Ymin = valueInput
         while True:
             try:
                 valueInput = float(input("Y upper bound: "))
@@ -85,10 +85,10 @@ while True:
                 print("NaN")
                 break
             else:
-                if Ymax >= valueInput:
+                if Ymin >= valueInput:
                     print("Input out of range!")
                 else:
-                    Ymin = valueInput
+                    Ymax = valueInput
                     break
     elif userInput == "m":
         print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymin, "<Y<", Ymax)
