@@ -3,7 +3,6 @@ Xres = 256
 Yres = 256
 Xmin = -2.0
 Xmax = 0.47
-#I think i got variables Ymin and Ymax flipped around, but can not be asked to go back and swap every instance. Live.
 Ymin = 1.12
 Ymax = -1.12
 colours = 72
@@ -26,7 +25,7 @@ def renderImage():
                         y = 0
                         #image space to mandel space
                         x0 = Xmin+(Xmax-Xmin)*(i/Xres)
-                        y0 = Ymin+(Ymax-Ymin)*(k/Yres)
+                        y0 = Ymin+(Ymax-Ymin)*((Yres-k)/Yres)
                         #limit at infinity? 256 is a random big number
                         for iteration in range(256):
                             #Sum of absolutes below sqrt5 is also a random big number. Live.
@@ -43,7 +42,7 @@ def renderImage():
             renders += 1
         else:
             with open("history.txt", "w") as file:
-                metaInfo = renderName + "\n" + str(Xmin) + "<X<" + str(Xmax) + "\n" + str(Ymax) + "<Y<" + str(Ymin) + "\ncolours: " + str(colours) + "\nresolution: " + str(Xres) + "*" + str(Yres) + "\n\n"
+                metaInfo = renderName + "\n" + str(Xmin) + "<X<" + str(Xmax) + "\n" + str(Ymin) + "<Y<" + str(Ymax) + "\ncolours: " + str(colours) + "\nresolution: " + str(Xres) + "*" + str(Yres) + "\n\n"
                 file.writelines(metaInfo)
             break
 #def rgb2hsv(r,g,b): will be made later
@@ -52,7 +51,7 @@ while True:
     userInput = input("Welcome to Python Mandlebrot Explorer CLI. (Z) to render image, (X) to set X bounds, (Y) to set Y bounds, (M) to magnify image, (R) to set resolution, (C) to set number of colours. Anything else to exit.")
     userInput = userInput.casefold()
     if userInput == "x":
-        print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymax, "<Y<", Ymin)
+        print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymin, "<Y<", Ymax)
         try:
             valueInput = float(input("X lower bound, NaN to ignore: "))
         except ValueError:
@@ -72,7 +71,7 @@ while True:
                     Xmax = valueInput
                     break
     elif userInput == "y":
-        print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymax, "<Y<", Ymin)
+        print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymin, "<Y<", Ymax)
         try:
             valueInput = float(input("Y lower bound, NaN to ignore: "))
         except ValueError:
@@ -92,7 +91,7 @@ while True:
                     Ymin = valueInput
                     break
     elif userInput == "m":
-        print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymax, "<Y<", Ymin)
+        print("Current bounds are:\n", Xmin, "<X<", Xmax, "\n", Ymin, "<Y<", Ymax)
         while True:
             try:
                 zoom = float(input("Magnification multiplier: "))
