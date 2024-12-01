@@ -1,0 +1,8 @@
+This text file is written into at the end of every render to save all of its presets. renderexample.ppm is an example of how it saves this data.
+
+renderexample.ppm
+-2.0<X<0.47
+1.12<Y<-1.12
+colours: 72
+resolution: 256*256
+
